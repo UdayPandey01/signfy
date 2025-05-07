@@ -77,13 +77,11 @@ export default function SignToTextPage() {
   const animationRef = useRef<number | null>(null);
   const confidenceIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Adding the missing handleLanguageToggle function
   const handleLanguageToggle = (newLanguage: string) => {
     setLanguage(newLanguage);
     resetRecognition();
   };
 
-  // Helper functions for hand sign detection
   const isFingerExtended = (landmarks: Landmark[], fingerTip: number, fingerBase: number): boolean => {
     return landmarks[fingerTip].y < landmarks[fingerBase].y;
   };
@@ -97,9 +95,7 @@ export default function SignToTextPage() {
     return fingerIndices.every(i => Math.abs(landmarks[i].y - avgY) < threshold);
   };
 
-  // Define basic ASL (American Sign Language) recognition patterns
   const signLanguageGestures: Record<string, GestureData> = {
-    // Basic communication phrases
     "hello": {
       description: "Wave with all fingers spread",
       detect: (landmarks) => {
